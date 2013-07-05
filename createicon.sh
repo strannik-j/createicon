@@ -1,34 +1,37 @@
 #!/bin/bash
 
-fbin=""					# without game.sh
-exe=mm8.exe				# without "wine ". Only "*.exe --command".
-exe2=MM8Setup.Exe			# without "wine ". Only "*.exe --command".
-gdesktop=mm8 			# without ".desktop"
-gdesktop2=mm8-setup
-dname="Меч и Магия VIII"
-dname2="MM8 - setup"
+fbin="system/"					# without run.sh
+exe="gothic.exe"				# without "wine ". Only "*.exe --command".
+exe2="GothicStarter.exe"			# without "wine ". Only "*.exe --command".
+gdesktop="Gothic" 			# without ".desktop"
+gdesktop2="GothicStarter"
+dname="Gothic"
+dname2="GothicStarter"
 dcomment="Linux-версия игры "$dname
 dversion=1
 dcategories='Game;ArcadeGame;'
 wversion=1.3.10
 
-# First game.sh
-echo '#!/bin/bash' > $fbin\game.sh
-echo 'PATH="'$PWD'/wine/usr/bin/:$PATH"' >> $fbin\game.sh
-echo 'export WINEPREFIX="'$PWD'/prefix"' >> $fbin\game.sh
-echo 'export WINEDEBUG="-all"' >> $fbin\game.sh
-echo 'cd '\"$PWD$''\/$fbin\" >> $fbin\game.sh
-echo 'wine' $exe >> $fbin\game.sh
-chmod a+x $fbin\game.sh
+# First run.sh
+echo '#!/bin/bash' > $fbin\run.sh
+echo 'PATH="'$PWD'/wine/usr/bin/:$PATH"' >> $fbin\run.sh
+echo 'export WINEPREFIX="'$PWD'/prefix"' >> $fbin\run.sh
+echo 'export WINEDEBUG="-all"' >> $fbin\run.sh
+echo 'cd '\"$PWD$''\/$fbin\" >> $fbin\run.sh
+echo 'wine' $exe >> $fbin\run.sh
+chmod a+x $fbin\run.sh
 
-#Second game.sh
-echo '#!/bin/bash' > $fbin\game2.sh
-echo 'PATH="'$PWD'/wine/usr/bin/:$PATH"' >> $fbin\game2.sh
-echo 'export WINEPREFIX="'$PWD'/prefix"' >> $fbin\game2.sh
-echo 'export WINEDEBUG="-all"' >> $fbin\game2.sh
-echo 'cd '\"$PWD$''$fbin\" >> $fbin\game2.sh
-echo 'wine' $exe2 >> $fbin\game2.sh
-chmod a+x $fbin\game2.sh
+#Second run.sh
+if [ $exe2 != "" ]
+then
+echo '#!/bin/bash' > $fbin\run2.sh
+echo 'PATH="'$PWD'/wine/usr/bin/:$PATH"' >> $fbin\run2.sh
+echo 'export WINEPREFIX="'$PWD'/prefix"' >> $fbin\run2.sh
+echo 'export WINEDEBUG="-all"' >> $fbin\run2.sh
+echo 'cd '\"$PWD$''$fbin\" >> $fbin\run2.sh
+echo 'wine' $exe2 >> $fbin\run2.sh
+chmod a+x $fbin\run2.sh
+fi
 
 # winecfg
 echo '#!/bin/bash' > wine/winecfg.sh
@@ -50,26 +53,29 @@ chmod a+x wine/winetricks.sh
 # First .desktop file
 echo '[Desktop Entry]' > $gdesktop.desktop
 echo 'Name='$dname >> $gdesktop.desktop
-echo 'Exec=sh '\"''$PWD'/'$fbin'game.sh'\" >> $gdesktop.desktop
+echo 'Exec=sh '\"''$PWD'/'$fbin'run.sh'\" >> $gdesktop.desktop
 echo 'Type=Application' >> $gdesktop.desktop
 echo 'Comment='$dcomment >> $gdesktop.desktop
 echo 'Categories='$dcategories >> $gdesktop.desktop
 echo 'StartupNotify=true' >> $gdesktop.desktop
-echo 'Icon='$PWD'/ico.png' >> $gdesktop.desktop
+echo 'Icon='$PWD'/logo.ico' >> $gdesktop.desktop
 echo 'Version='$dversion >> $gdesktop.desktop
 chmod a+x $gdesktop.desktop
 
- Second .desktop file
+# Second .desktop file
+if [ $gdesktop2 != "" ]
+then
 echo '[Desktop Entry]' > $gdesktop2.desktop
 echo 'Name='$dname2 >> $gdesktop2.desktop
-echo 'Exec=sh '\"''$PWD'/'$fbin'game2.sh'\" >> $gdesktop2.desktop
+echo 'Exec=sh '\"''$PWD'/'$fbin'run2.sh'\" >> $gdesktop2.desktop
 echo 'Type=Application' >> $gdesktop2.desktop
 echo 'Comment='$dcomment >> $gdesktop2.desktop
 echo 'Categories='$dcategories >> $gdesktop2.desktop
 echo 'StartupNotify=true' >> $gdesktop2.desktop
-echo 'Icon='$PWD'/ico2.png' >> $gdesktop2.desktop
+echo 'Icon='$PWD'/logo2.ico' >> $gdesktop2.desktop
 echo 'Version='$dversion >> $gdesktop2.desktop
 chmod a+x $gdesktop.desktop
+fi
 
 # winecfg .desktop file
 echo '[Desktop Entry]' > winecfg.desktop
