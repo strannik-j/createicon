@@ -14,7 +14,7 @@ wversion=1.7
 
 # First run.sh
 echo '#!/bin/bash' > $fbin\run.sh
-echo 'PATH="'$PWD'/wine/usr/bin/:$PATH"' >> $fbin\run.sh
+echo 'PATH="'$PWD'/wine/bin/:$PATH"' >> $fbin\run.sh
 echo 'export WINEPREFIX="'$PWD'/prefix"' >> $fbin\run.sh
 echo 'export WINEDEBUG="-all"' >> $fbin\run.sh
 echo 'cd '\"$PWD$''\/$fbin\" >> $fbin\run.sh
@@ -25,7 +25,7 @@ chmod a+x $fbin\run.sh
 if [ $exe2 -a $exe2 != "" ]
 then
 echo '#!/bin/bash' > $fbin\run2.sh
-echo 'PATH="'$PWD'/wine/usr/bin/:$PATH"' >> $fbin\run2.sh
+echo 'PATH="'$PWD'/wine/bin/:$PATH"' >> $fbin\run2.sh
 echo 'export WINEPREFIX="'$PWD'/prefix"' >> $fbin\run2.sh
 echo 'export WINEDEBUG="-all"' >> $fbin\run2.sh
 echo 'cd '\"$PWD$''$fbin\" >> $fbin\run2.sh
@@ -35,7 +35,7 @@ fi
 
 # winecfg
 echo '#!/bin/bash' > wine/winecfg.sh
-echo 'PATH="'$PWD'/wine/usr/bin/:$PATH"' >> wine/winecfg.sh
+echo 'PATH="'$PWD'/wine/bin/:$PATH"' >> wine/winecfg.sh
 echo 'export WINEPREFIX="'$PWD'/prefix"' >> wine/winecfg.sh
 echo 'export WINEDEBUG="-all"' >> wine/winecfg.sh
 echo 'wine winecfg' >> wine/winecfg.sh
@@ -43,10 +43,14 @@ chmod a+x wine/winecfg.sh
 
 # winetricks
 echo '#!/bin/bash' > wine/winetricks.sh
-echo 'PATH="'$PWD'/wine/usr/bin/:$PATH"' >> wine/winetricks.sh
+echo 'PATH="'$PWD'/wine/bin/:$PATH"' >> wine/winetricks.sh
 echo 'export WINEPREFIX="'$PWD'/prefix"' >> wine/winetricks.sh
 echo 'export WINEDEBUG="-all"' >> wine/winetricks.sh
 echo 'cd '\"$PWD$'/'wine\" >> wine/winetricks.sh
+echo 'if [ ! -f '$PWD'/wine/winetricks ]' >> wine/winetricks.sh
+echo 'then' >> wine/winetricks.sh
+echo 'wget http://www.kegel.com/wine/winetricks && chmod a+x winetricks' >> wine/winetricks.sh
+echo 'fi'  >> wine/winetricks.sh
 echo 'sh winetricks' >> wine/winetricks.sh
 chmod a+x wine/winetricks.sh
 
