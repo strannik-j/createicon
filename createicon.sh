@@ -1,16 +1,16 @@
 #!/bin/bash
 
-fbin="system/"					# without run.sh
-exe="gothic.exe"				# without "wine ". Only "*.exe --command".
-exe2="GothicStarter.exe"			# without "wine ". Only "*.exe --command".
-gdesktop="Gothic" 			# without ".desktop"
-gdesktop2="GothicStarter"
-dname="Gothic"
-dname2="GothicStarter"
-dcomment="Linux-версия игры "$dname
+fbin="app/"					# without run.sh
+exe="start.exe"				# without "wine ". Only "*.exe --command".
+#exe2="start2.exe"			# without "wine ". Only "*.exe --command".
+gdesktop="program" 			# without ".desktop"
+#gdesktop2="program2"
+dname="My Program"
+#dname2="My Program 2"
+dcomment="Linux-версия программы "$dname
 dversion=1
 dcategories='Game;ArcadeGame;'
-wversion=1.3.10
+wversion=1.7
 
 # First run.sh
 echo '#!/bin/bash' > $fbin\run.sh
@@ -22,7 +22,7 @@ echo 'wine' $exe >> $fbin\run.sh
 chmod a+x $fbin\run.sh
 
 #Second run.sh
-if [ $exe2 != "" ]
+if [ $exe2 -a $exe2 != "" ]
 then
 echo '#!/bin/bash' > $fbin\run2.sh
 echo 'PATH="'$PWD'/wine/usr/bin/:$PATH"' >> $fbin\run2.sh
@@ -63,7 +63,7 @@ echo 'Version='$dversion >> $gdesktop.desktop
 chmod a+x $gdesktop.desktop
 
 # Second .desktop file
-if [ $gdesktop2 != "" ]
+if [ $gdesktop2 -a $gdesktop2 != "" ]
 then
 echo '[Desktop Entry]' > $gdesktop2.desktop
 echo 'Name='$dname2 >> $gdesktop2.desktop
