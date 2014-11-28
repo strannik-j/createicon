@@ -47,7 +47,7 @@ echo 'PATH="'$PWD'/wine/bin/:$PATH"' >> wine/winetricks.sh
 echo 'export WINEPREFIX="'$PWD'/prefix"' >> wine/winetricks.sh
 echo 'export WINEDEBUG="-all"' >> wine/winetricks.sh
 echo 'cd '\"$PWD$'/'wine\" >> wine/winetricks.sh
-echo 'if [ ! -f '$PWD'/wine/winetricks ]' >> wine/winetricks.sh
+echo 'if [ ! -f "'$PWD'/wine/winetricks" ]' >> wine/winetricks.sh
 echo 'then' >> wine/winetricks.sh
 echo 'wget http://www.kegel.com/wine/winetricks && chmod a+x winetricks' >> wine/winetricks.sh
 echo 'fi'  >> wine/winetricks.sh
