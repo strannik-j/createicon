@@ -49,7 +49,7 @@ echo 'export WINEDEBUG="-all"' >> wine/winetricks.sh
 echo 'cd '\"$PWD$'/'wine\" >> wine/winetricks.sh
 echo 'if [ ! -f "'$PWD'/wine/winetricks" ]' >> wine/winetricks.sh
 echo 'then' >> wine/winetricks.sh
-echo 'wget http://www.kegel.com/wine/winetricks && chmod a+x winetricks' >> wine/winetricks.sh
+echo 'wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && chmod a+x winetricks' >> wine/winetricks.sh
 echo 'fi'  >> wine/winetricks.sh
 echo 'sh winetricks' >> wine/winetricks.sh
 chmod a+x wine/winetricks.sh
